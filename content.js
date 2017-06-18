@@ -86,7 +86,7 @@ function clearPrice(price) {
 
 function formatTime(seconds) {
     var years = Math.floor(seconds / (60 * 60 * 24 * 365));
-    var days = Math.floor(seconds / (60 * 60 * 24));
+    var days = Math.floor((seconds % (60 * 60 * 24 * 365)) / (60 * 60 * 24));
     var hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
     var minutes = Math.floor((seconds % (60 * 60)) / (60));
 
