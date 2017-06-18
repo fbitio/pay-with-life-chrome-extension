@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body { 
+                min-width: 420px; 
+                overflow-x: hidden; 
+                font-family: Arial, sans-serif; 
+                font-size: 12px; 
+            }
+            input, textarea { 
+                width: 420px; 
+            }
+            input#save { 
+                font-weight: bold; width: auto; 
+            }
+        </style>
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <form id="popupsettings">
+            <p>
+                <label for="wageInput">Hourly wage</label><br />
+                <input type="number" id="wageInput" name="wageInput" size="50" value="" autocomplete="off" />
+            </p>
+            <p>
+                <label for="taxRate">Your tax rate (%)</label><br/>
+                <input type="number" id="taxRate" name="taxRate" size="20" value="30" autocomplete="off" />
+            <p>
+                <input id="save" type="submit" value="Save and reload page" />
+            </p>
+        </form>
+    </body>
+</html>
