@@ -16,7 +16,7 @@ function replacePriceWithTime(hourlyWage, taxRate) {
 
     var elements = document.getElementsByTagName('*');
 
-    var currencyRegex = /(\$|£|€)\s?(\d{1,3},?(\d{3},?)*\d{3}(.\d{0,3})?|\d{1,3}(.\d{2})?)/gi;
+    var currencyRegex = /((\$|£)\s?\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?)|(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?\s?€)/gi;
     var re = new RegExp(currencyRegex);
 
     var hourlyNetWage = hourlyWage - (hourlyWage * (taxRate / 100));
@@ -48,8 +48,9 @@ function replacePriceWithTime(hourlyWage, taxRate) {
 
                 var elementText = text;
 
-
+                // replace all matches
                 for (var i=0; i < priceMatches.length; i++) {
+                    
                     var itemPrice = priceMatches[i];
                     var price = clearPrice(itemPrice);
 
@@ -81,7 +82,20 @@ function isValidPrice(price) {
 }
 
 function clearPrice(price) {
-    return price.replace('£','').replace('$','').replace(/,/g, '');
+    var result = price.replace('£','').replace('$','').replace('€','').trim();
+
+    // check if comma is used as decimal separator then replace with full stop
+    if (result.substring(result.length-3, result.length-2) === ',') {
+
+        // clean thousands separator and replace comma with full stop
+        result = result.replace(/\./g,'').replace(/,/g,'.');
+    } else if (result.substring(result.length-3, result.length-2) === '.'){
+        result = result.replace(/,/g, '');
+    } else {
+        result = result.replace(/\./g,'').replace(/,/g,'');
+    }
+
+    return result;
 }
 
 function formatTime(seconds) {
@@ -104,5 +118,5 @@ function formatTime(seconds) {
 }
 
 function containsPrice(text) {
-    return text.indexOf('£') > -1 || text.indexOf('$') > -1;
+    return text.indexOf('£') > -1 || text.indexOf('$') > -1 || text.indexOf('€') > -1;
 }
