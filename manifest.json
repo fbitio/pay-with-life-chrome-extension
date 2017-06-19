@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Pay with life",
     "description": "See how much you are paying with your life for the items you buy online",
-    "version": "0.2",
+    "version": "0.3",
     "content_scripts": [
         {
             "matches": [
